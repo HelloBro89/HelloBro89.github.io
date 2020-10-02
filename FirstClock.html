@@ -1,0 +1,142 @@
+<canvas id="myCanvas" width="600" height="500" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<p><button onclick="stop()">STOP</button></p>
+<p><button onclick="start()">START</button></p>
+<p><button onclick="reset()">RESET</button></p>
+
+<script>
+    //<p><button onclick="go()">START</button></p>
+    let b = document.getElementById("myCanvas");
+    let ctx = b.getContext("2d");
+    function first(xSec, ySec, xMin, yMin, xHour, yHour) {
+        //clear()
+        ctx.clearRect(0, 0, 600, 500)
+        ctx.beginPath();
+        ctx.strokeStyle = 'black';
+        //ctx.fillStyle = 'red'; // почему не работает?
+        ctx.arc(300, 250, 200, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();            //часовая 
+        ctx.lineWidth = 15;
+        ctx.strokeStyle = 'black';
+        ctx.moveTo(300, 250);
+        ctx.lineTo(xHour, yHour);
+        ctx.stroke();  // что это значит ? типо  "применить" ?
+
+        ctx.beginPath()          //минутная
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = 'green';
+        ctx.moveTo(300, 250);
+        ctx.lineTo(xMin, yMin);
+        ctx.stroke();
+
+        ctx.beginPath();          //секундная    
+        ctx.lineWidth = 1;
+        ctx.moveTo(300, 250);
+        ctx.lineTo(xSec, ySec);
+        ctx.strokeStyle = 'red'
+        ctx.stroke();
+
+
+        ctx.beginPath();                    //деления
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 1;
+        ctx.moveTo(100, 250);
+        ctx.lineTo(120, 250);
+        ctx.moveTo(500, 250);
+        ctx.lineTo(480, 250);
+        ctx.moveTo(300, 50);
+        ctx.lineTo(300, 70);
+        ctx.moveTo(300, 450);
+        ctx.lineTo(300, 430);
+        ctx.stroke();
+
+        ctx.beginPath();                    //циферблат
+        ctx.strokeStyle = 'brown';
+        ctx.lineWidth = 1;
+        ctx.font = "50px Arial";
+        ctx.strokeText("12", 273, 110);
+        ctx.strokeText("9", 122, 267);
+        ctx.strokeText("6", 285, 425);
+        ctx.strokeText("3", 450, 270);
+
+    }
+
+
+    function clear() {
+        ctx.clearRect(0, 0, 600, 500)
+    }
+
+    let date = new Date();
+    let sumSec = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
+
+    let degSec = sumSec * 6
+    let degMin = sumSec * 0.1;
+    let degHour = sumSec * 0.008333333333333333;
+
+    let creatId;
+    //let creatId1;
+
+    function start() {
+        clearInterval(creatId);
+        creatId = setInterval(() => {
+            degSec += 6;
+            degMin += 0.1;
+            degHour += 0.008333333333333333;
+
+            first(
+                300 + (Math.sin(degSec * Math.PI / 180) * 180),
+                250 - (Math.cos(degSec * Math.PI / 180) * 180),
+                300 + (Math.sin(degMin * Math.PI / 180) * 160),
+                250 - (Math.cos(degMin * Math.PI / 180) * 160),
+                300 + (Math.sin(degHour * Math.PI / 180) * 120),
+                250 - (Math.cos(degHour * Math.PI / 180) * 120),
+            );
+        }, 1000)
+    }
+
+    function start1() {
+
+        date = new Date();
+        sumSec = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
+        degSec = sumSec * 6
+        degMin = sumSec * 0.1;
+        degHour = sumSec * 0.008333333333333333;
+
+        creatId = setInterval(() => {
+            degSec += 6;
+            degMin += 0.1;
+            degHour += 0.008333333333333333;
+
+            first(
+                300 + (Math.sin(degSec * Math.PI / 180) * 180),
+                250 - (Math.cos(degSec * Math.PI / 180) * 180),
+                300 + (Math.sin(degMin * Math.PI / 180) * 160),
+                250 - (Math.cos(degMin * Math.PI / 180) * 160),
+                300 + (Math.sin(degHour * Math.PI / 180) * 120),
+                250 - (Math.cos(degHour * Math.PI / 180) * 120),
+            );
+        }, 1000)
+    }
+
+    function stop() {
+        clearInterval(creatId);
+        first(
+            300 + (Math.sin(degSec * Math.PI / 180) * 180),
+            250 - (Math.cos(degSec * Math.PI / 180) * 180),
+            300 + (Math.sin(degMin * Math.PI / 180) * 160),
+            250 - (Math.cos(degMin * Math.PI / 180) * 160),
+            300 + (Math.sin(degHour * Math.PI / 180) * 120),
+            250 - (Math.cos(degHour * Math.PI / 180) * 120)
+        )
+    }
+
+    function reset() {
+        clearInterval(creatId);
+        start1()
+
+    }
+    start()
+</script>
