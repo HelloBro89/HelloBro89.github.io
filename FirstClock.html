@@ -26,6 +26,10 @@
         ctx.beginPath();
         ctx.arc(300, 250, 241, 0, 2 * Math.PI);
         ctx.lineWidth = 5;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
+        ctx.beginPath();
         ctx.arc(300, 250, 199, 0, 2 * Math.PI);
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'black';
@@ -63,13 +67,13 @@
         ctx.beginPath();                    //деления
         ctx.strokeStyle = '#FFA500';
         ctx.lineWidth = 8;
-        ctx.moveTo(100, 250);
+        ctx.moveTo(105, 250);
         ctx.lineTo(120, 250);
-        ctx.moveTo(500, 250);
+        ctx.moveTo(495, 250);
         ctx.lineTo(480, 250);
-        ctx.moveTo(300, 50);
+        ctx.moveTo(300, 55);
         ctx.lineTo(300, 70);
-        ctx.moveTo(300, 450);
+        ctx.moveTo(300, 445);
         ctx.lineTo(300, 430);
         ctx.stroke();
 
