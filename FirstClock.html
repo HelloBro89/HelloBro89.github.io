@@ -13,16 +13,24 @@
     let ctx = b.getContext("2d");
     function first(xSec, ySec, xMin, yMin, xHour, yHour, xAlarmHour, yAlarmMin) {
 
-
         ctx.clearRect(0, 0, 600, 500)
 
         ctx.beginPath();
-        // ctx.strokeStyle = 'blue;';
-        //сtx.fillStyle = 'red'; // почему не работает ?
         ctx.arc(300, 250, 220, 0, 2 * Math.PI);
+        ctx.fillStyle = 'grey';
         ctx.lineWidth = 42;
         ctx.strokeStyle = '#0bcddb73';
+        ctx.fill()
         ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(300, 250, 241, 0, 2 * Math.PI);
+        ctx.lineWidth = 5;
+        ctx.arc(300, 250, 199, 0, 2 * Math.PI);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
 
         ctx.beginPath();            //часовая 
         ctx.lineWidth = 15;
@@ -65,7 +73,7 @@
         ctx.lineTo(300, 430);
         ctx.stroke();
 
-        //ctx.beginPath();                    //циферблат
+        ctx.beginPath();                    //циферблат
         ctx.strokeStyle = 'brown';
         ctx.lineWidth = 1;
         ctx.font = "65px Mv boli";
@@ -73,6 +81,7 @@
         ctx.strokeText("9", 132, 267);
         ctx.strokeText("6", 275, 415);
         ctx.strokeText("3", 430, 270);
+        ctx.stroke();
     }
 
 
@@ -114,11 +123,12 @@
 
     function start1() {
 
-        date = new Date();
-        sumSec = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
-        degSec = sumSec * (360 / 60);
-        degMin = sumSec * (360 / 3600);
-        degHour = sumSec * (360 / (12 * 3600));
+        let date = new Date();
+        let sumSec = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
+
+        let degSec = (sumSec * (360 / 60)) + (360 / 60);
+        let degMin = (sumSec * (360 / 3600)) + (360 / 3600);
+        let degHour = (sumSec * (360 / (12 * 3600))) + (360 / (12 * 3600));
 
         creatId = setInterval(() => {
             degSec += (360 / 60);
@@ -154,12 +164,10 @@
         start1()
     }
 
-
-
     function alarm(setHour, setMin) {
         clearInterval(creatId);
         start(setHour, setMin);
     }
-    start()
+    start1()
     alarm(19, 33)
 </script>
