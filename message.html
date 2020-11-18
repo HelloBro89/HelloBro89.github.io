@@ -1,0 +1,21 @@
+<!doctype html>
+
+<body>
+
+    <a download="Hello, kisi.txt" href="" id="check">download</a>
+
+
+
+    <script>
+
+        let s = document.querySelector('#check');
+
+        let str = "Привет как дела моя киси?, расскажи что по чём, как там на работе, что нового ?"
+
+        let blob = new Blob([str], { type: 'text/plain' })
+
+        s.href = URL.createObjectURL(blob);
+
+    </script>
+
+</body>
