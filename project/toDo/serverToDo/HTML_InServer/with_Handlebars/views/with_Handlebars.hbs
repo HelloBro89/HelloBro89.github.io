@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div id='main'>
+        {{#if tasksVisible}}
+        {{#each tasks}}
+        <div><input type="checkbox">{{this.task}}</div>
+        {{/each}}
+        {{/if}}
+    </div>
+    <p> <input type="text" id="string">
+        <input type="button" id="but" value="добавить">
+    </p>
+    <script>
+
+
+        let string = document.getElementById('string');
+        string.style.marginTop = '50px';
+
+        let but = document.getElementById('but');
+        but.style.marginLeft = '30px';
+
+        let main = document.getElementById('main');
+        let i = main.children.length + 1;
+        but.onclick = add;
+        main.onchange = del;
+
+        //console.log(main.outerHTML)
+
+        function del(e) {
+
+            let tar = e.target;
+            let targetParent = tar.parentNode;
+            if (tar.checked) {
+
+                targetParent.style.textDecoration = 'line-through'; // перечёркнутый текст
+                let buttonDel = document.createElement('input');
+                buttonDel.type = 'button';
+                buttonDel.value = 'удалить';
+                buttonDel.id = 'check';
+                buttonDel.setAttribute('style', 'margin-Left:30px; height:20px');
+                targetParent.append(buttonDel);
+
+                buttonDel.onclick = () => targetParent.remove();
+
+            } else {
+
+                targetParent.style.textDecoration = 'none';
+                targetParent.querySelector('#check').remove();
+            }
+        }
+        function add(e) {
+            e.preventDefault();
+
+            let task = string.value;
+            i++;
+
+            let div = document.createElement('div');
+            div.id = `id${i}`;
+            main.append(div);
+            let findDiv = document.querySelector(`#id${i}`);
+
+            let textNode = document.createTextNode(`${task}`);
+            findDiv.prepend(textNode);
+
+            let input = document.createElement('input');
+            input.type = 'checkbox';
+            findDiv.prepend(input);
+
+            div.style.fontSize = '16px';
+
+            let stringify = JSON.stringify({ task: task });
+            let request = new XMLHttpRequest();
+
+            request.open('POST', '/taskData', true);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.addEventListener('load', () => {
+                // console.log(`${request.response} : received POST`)
+            });
+            request.send(stringify);
+
+            // let requestGet = new XMLHttpRequest();
+            // requestGet.open('GET', '/taskData', true);
+            // requestGet.setRequestHeader('Content-Type', 'application/json');
+            // requestGet.addEventListener('load', () => {
+            //     // console.log(`${requestGet.response} : GET`);
+            //     // let pars = JSON.parse(requestGet.response);
+            //     // console.log(pars)
+            // });
+            // requestGet.send();
+            string.value = '';
+        }
+    </script>
+
+
+
+</body>
+<html>
