@@ -100,7 +100,7 @@ class App extends React.Component {
         let classIndex = Number(e.target.parentElement.className);
         let textInfo = e.target.parentElement.textContent;
         let timeOfCreation = this.state.tasks[classIndex].time;
-        console.log(textInfo)
+
         let textDecor = (e.target.parentElement.style.textDecoration === 'none') ?
             {
                 task: textInfo,
@@ -169,7 +169,7 @@ class App extends React.Component {
             <div onChange={this.changeStyle}>
                 {
                     this.state.tasks.map(function (item, ind) {
-                        let comp = (item.checkComponent === false) ? null : variable;
+                        let comp = (item.checkBoxStatus === false) ? null : variable;
                         return <div className={ind} style={item.styles} key={ind} >
                             < OneTask check={item.checkBoxStatus} />{item.task}{comp}</div>
                     })

@@ -21,17 +21,12 @@ class TaskStore extends ReduceStore {
                 return state;
 
             case ActionTypes.REMOVE_ALL_ITEM:
+
                 return state.splice(0);
 
             case ActionTypes.CHANGE_STYLE_ITEM:
-                console.log(state._tail.array[action.num].styles);
-                state._tail.array[action.num].styles = action.decore.style;  // можно ли так подбираться(написано что нельзя изменять) ???
-                // state._tail.array[action.num].styles.textDecoration = 'lineThrough'; // почему он принимает только объекты?
 
-                state._tail.array[action.num].component = action.decore.component;
-                // а нельзя прямиком поменять ?
-
-                return state;
+                return state.splice(action.num, 1, action.decore);
 
             // case ActionTypes.REMOVE_ITEM:
             //     let index = state.indexOf(action.text);
@@ -39,8 +34,6 @@ class TaskStore extends ReduceStore {
             //         return state.delete(index);
             //     }
             //     return state;
-
-
 
             default:
                 return state;

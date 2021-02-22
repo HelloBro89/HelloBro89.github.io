@@ -18,18 +18,22 @@ class AppView extends React.Component {
 
     changeStyle(e) {
         let ind = e.target.parentElement.className;
+        let text = e.target.parentElement.textContent;
 
         let textDecore = (e.target.parentElement.style.textDecoration === "none") ?
-            { style: { textDecoration: "line-through" }, component: <ButDel /> } :
             {
-                style: { textDecoration: "none" }, component: null
+                task: text,
+                styles: { textDecoration: "line-through" },
+                checkBoxStatus: true
+            } :
+            {
+                task: text,
+                styles: { textDecoration: "none" },
+                checkBoxStatus: false
             };
 
-        // let textDecore = (e.target.parentElement.style.textDecoration === "none") ?
-        //     { textDecoration: "line-through" } : { textDecoration: "none" };
-
         this.props.onChangeItem(ind, textDecore);
-        this.setState({ newTask: "" })
+        this.setState({ newTask: "" });
     }
 
     onRemoveAll() {
@@ -43,8 +47,7 @@ class AppView extends React.Component {
             this.props.onAddItem({
                 task: this.state.newTask,
                 styles: { textDecoration: "none" },
-                checkBoxStatus: false,
-                component: null
+                checkBoxStatus: false
             });
             this.setState({ newTask: "" });
         }
@@ -61,9 +64,9 @@ class AppView extends React.Component {
             <div onChange={this.changeStyle} >
                 {
                     this.props.tasks.map(function (item, ind) {
-
+                        let comp = (item.checkBoxStatus === true) ? <ButDel /> : null;
                         return <div className={ind} style={item.styles} key={ind}>
-                            <input type="checkbox" />{item.task}{item.component}
+                            <input type="checkbox" />{item.task}{comp}
                         </div>
                     })
                 }
