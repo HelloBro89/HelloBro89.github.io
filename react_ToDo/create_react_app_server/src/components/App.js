@@ -90,7 +90,7 @@ class App extends React.Component {
     };
 
     delTask(numDiv) {
-        Number(numDiv);
+        numDiv = Number(numDiv);
         delOneTask({ idTask: this.state.tasks[numDiv].time });
         this.state.tasks.splice(numDiv, 1)
         this.setState({ tasks: this.state.tasks })
@@ -98,15 +98,14 @@ class App extends React.Component {
 
     changeStyle(e) {
         let classIndex = Number(e.target.parentElement.className);
-        let textInfo = e.target.parentElement.textContent.slice(1);
+        let textInfo = e.target.parentElement.textContent;
         let timeOfCreation = this.state.tasks[classIndex].time;
-
+        console.log(textInfo)
         let textDecor = (e.target.parentElement.style.textDecoration === 'none') ?
             {
                 task: textInfo,
                 styles: { textDecoration: 'line-through' },
                 checkBoxStatus: true,
-                component: <DelButton filter={this.delTask} />,
                 time: timeOfCreation,
                 checkComponent: true
             } :
@@ -114,7 +113,7 @@ class App extends React.Component {
                 task: textInfo,
                 styles: { textDecoration: "none" },
                 checkBoxStatus: false,
-                component: null, time: timeOfCreation,
+                time: timeOfCreation,
                 checkComponent: false
             };
 
@@ -130,12 +129,6 @@ class App extends React.Component {
 
         message = message.map(item => item.task = JSON.parse(item.task));
 
-        for (let sort of message) {
-            if (sort.checkComponent === true) {
-                sort.component = <DelButton filter={this.delTask} />;
-            };
-        };
-
         this.setState({ tasks: message });
     }
 
@@ -148,7 +141,6 @@ class App extends React.Component {
             task: text,
             styles: { textDecoration: "none" },
             checkBoxStatus: false,
-            component: null,
             time: timeAddTask,
             checkComponent: false
         }
@@ -170,14 +162,16 @@ class App extends React.Component {
     }
 
     render() {
+        let variable = < DelButton filter={this.delTask} />;
 
         return <div>
             <p>My ToDo </p>
             <div onChange={this.changeStyle}>
                 {
                     this.state.tasks.map(function (item, ind) {
-
-                        return <div className={ind} style={item.styles} key={ind} > < OneTask check={item.checkBoxStatus} />{item.task}{item.component}</div>
+                        let comp = (item.checkComponent === false) ? null : variable;
+                        return <div className={ind} style={item.styles} key={ind} >
+                            < OneTask check={item.checkBoxStatus} />{item.task}{comp}</div>
                     })
                 }
             </div>
