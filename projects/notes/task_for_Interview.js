@@ -1,4 +1,28 @@
 
+function reverse(x) {
+    let r = '';
+    if (x === 0) {
+        r = 0
+    } else {
+        x = String(x);
+        x = (x % 10 === 0) ? x.slice(0, x.length - 1) : x;
+        x = x.split('').reverse();
+
+        if (x[x.length - 1] === '-') {
+            x.splice(x.length - x.length, 0, x[x.length - 1]);
+            x.splice(x.length - 1);
+
+        }
+        r = Number(x.join(''))
+    }
+
+    r = (r >= (-2) ** 31 && r <= 2 ** 31) ? r : 0
+    return (r);
+
+}
+
+reverse(-1230)
+
 //3333333333333333
 
 
