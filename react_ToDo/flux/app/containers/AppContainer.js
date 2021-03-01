@@ -17,14 +17,11 @@ class AppContainer extends React.Component {
             onAddItem: Actions.addItem,
             onRemoveAllItem: Actions.removeAllItem,
             onChangeItem: Actions.changeItemStyle
-            // ,
-            // onRemoveItem: Actions.removeItem
         };
-    }
+    };
     render() {
         return <AppView tasks={this.state.tasks}
             onChangeItem={this.state.onChangeItem}
-            // onRemoveItem={this.state.onRemoveItem}
             onRemoveAllItem={this.state.onRemoveAllItem}
             onAddItem={this.state.onAddItem} />;
 

@@ -21,7 +21,6 @@ async function sendChange(mess) {
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        // body: mess
         body: JSON.stringify(mess)
     });
     let result = await requestPost.text();
@@ -177,7 +176,7 @@ class App extends React.Component {
             </div>
             <p>
                 <input type="text" id="string" />
-                < input onClick={this.add} type="button" id="but" value="добавить" />
+                < input onClick={this.add} type="button" id="but" value="add" />
                 <input onClick={this.clear} type="button" id="clear" value="clear" />
             </p >
         </div >

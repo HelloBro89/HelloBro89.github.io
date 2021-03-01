@@ -28,13 +28,6 @@ class TaskStore extends ReduceStore {
 
                 return state.splice(action.num, 1, action.decore);
 
-            // case ActionTypes.REMOVE_ITEM:
-            //     let index = state.indexOf(action.text);
-            //     if (index > -1) {
-            //         return state.delete(index);
-            //     }
-            //     return state;
-
             default:
                 return state;
         }

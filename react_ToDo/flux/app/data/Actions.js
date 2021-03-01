@@ -20,16 +20,8 @@ const Actions = {
             num,
             decore
         })
-
     }
 
-    // ,
-    // removeItem(text) {
-    //     TasksDispatcher.dispatch({
-    //         type: ActionTypes.REMOVE_ITEM,
-    //         text,
-    //     });
-    // }
 };
 
 export default Actions;

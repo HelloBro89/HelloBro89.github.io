@@ -1,7 +1,7 @@
 import React from "react";
 
 const ButDel = props =>
-    <input style={{ marginLeft: 50 }} type="button" id="but" value="удалить" />;
+    <input style={{ marginLeft: 50 }} type="button" id="but" value="delete" />;
 
 class AppView extends React.Component {
 
@@ -73,8 +73,8 @@ class AppView extends React.Component {
             </div>
             <p>
                 <input type="text" value={this.state.newTask} onChange={this.onInputChange} />
-                <button onClick={this.onAdd}>Добавить</button>
-                <button onClick={this.onRemoveAll}>Очистить</button>
+                <button onClick={this.onAdd}>Add</button>
+                <button onClick={this.onRemoveAll}>Cleare</button>
             </p >
         </div >
     }
