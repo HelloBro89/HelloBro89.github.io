@@ -13,10 +13,10 @@ function reverse(x) {
             x.splice(x.length - 1);
 
         }
-        r = Number(x.join(''))
+        r = Number(x.join(''));
     }
 
-    r = (r >= (-2) ** 31 && r <= 2 ** 31) ? r : 0
+    r = (r >= (-2) ** 31 && r <= 2 ** 31) ? r : 0;
     return (r);
 
 }
