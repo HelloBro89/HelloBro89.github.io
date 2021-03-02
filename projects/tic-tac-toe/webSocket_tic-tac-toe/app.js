@@ -13,7 +13,6 @@ io.on('connection', function (socket) {
     console.log('A user connected');
 
     socket.on('sendCoor', (data) => {
-        // console.log(data);
         io.sockets.emit('sendRes', data)
     })
 
