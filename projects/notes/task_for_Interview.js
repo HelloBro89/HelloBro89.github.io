@@ -1,4 +1,39 @@
 
+// for array HARD
+
+let findMedianSortedArrays = function (nums1, nums2) {
+
+    if (nums1.length === 0 && nums2.length === 1) {
+        return nums2[0]
+    } else if (nums2.length === 0 && nums1.length === 1) {
+        return nums1[0]
+    }
+    let array = nums1.concat(nums2);
+    let num = 0;
+    for (let sort of array) {
+        if (sort !== 0) {
+            break;
+        } else {
+            num++;
+        }
+        if (num === array.length) return 0;
+    }
+
+    array = array.sort((a, b) => a - b);
+    let ind = Math.floor(array.length / 2);
+
+    let median = (array.length % 2 === 1) ? array[ind] :
+        (array[ind] + array[ind - 1]) / 2;
+    return median;
+};
+
+let nums1 = [0, 0];
+let nums2 = [0, 0];
+
+console.log(findMedianSortedArrays(nums1, nums2));
+
+/////////////////////////////////////////////
+
 function reverse(x) {
     let r = '';
     if (x === 0) {
