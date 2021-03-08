@@ -1,3 +1,56 @@
+// № 30
+
+let findSubstring = function (s, words) {
+
+    // let str = '';
+    // let output = [];
+    let num = words.length;
+    let length = words.length;
+    let n = 0;
+    let point = 0;
+
+    for (let i = words.length - 1; i > 1; i--) {
+        num *= i;
+    }
+
+    for (let i = 1; i < length + 1; i++) {
+
+        // console.log(words.join(''));
+        console.log(point++)
+        for (let j = 1, w = 1; j < length + 1; j++, w++) {
+            console.log(point++)
+            if (point === num) {
+                console.log("tut 1");
+                return
+            }
+            if (w === length - 1) {
+                w = 1;
+                console.log(point++);
+                if (point === num) {
+                    console.log("tut 2")
+                    return
+                }
+            }
+            console.log(point++);
+            // [words[j], words[j + 1]] = [words[j + 1], words[j]];
+            // console.log(words.join(''));
+
+            if (point === num) {
+                console.log("tut 3")
+                return
+            }
+        }
+
+        // [words[0], words[i]] = [words[i], words[0]];
+    }
+}
+
+let s = "barfoothefoobarduckman";
+let words = ["1", "2", "3", '4'];
+
+findSubstring(s, words);
+
+
 
 // for array HARD
 
