@@ -1,4 +1,4 @@
-// № 30
+//           № 30
 
 let findSubstring = function (s, words) {
 
@@ -44,12 +44,7 @@ let findSubstring = function (s, words) {
         // [words[0], words[i]] = [words[i], words[0]];
     }
 }
-
-let s = "barfoothefoobarduckman";
-let words = ["1", "2", "3", '4'];
-
-findSubstring(s, words);
-
+//              № 4
 
 
 // for array HARD
@@ -85,8 +80,9 @@ let nums2 = [0, 0];
 
 console.log(findMedianSortedArrays(nums1, nums2));
 
-/////////////////////////////////////////////
 
+
+//   7
 function reverse(x) {
     let r = '';
     if (x === 0) {
